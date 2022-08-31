@@ -8,7 +8,8 @@
 Реализация с помощью react.
 
 **Ссылки:**
-GitHub: https://natali210.github.io/mesto/ 
+GitHub: https://github.com/Natali210/mesto-react
+GH-pages: https://natali210.github.io/mesto/
 
 **Команды для сборки и запуска проекта:**
 npm start - режим разработчика
