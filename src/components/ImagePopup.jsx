@@ -9,7 +9,7 @@ const ImagePopup = props => {
       <div className="popup__container popup__container_open-image">
         <figure className="popup__image-block">
           <button type="button" aria-label="Закрыть" className="popup__close" onClick={onClose} />
-          <img src={card.link} alt="Фотография" className="popup__image-element" />
+          <img src={card.link} alt={card.name} className="popup__image-element" />
           <figcaption className="popup__place-title">{card.name}</figcaption>
         </figure>
       </div>

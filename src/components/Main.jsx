@@ -6,9 +6,9 @@ import { api } from "../utils/Api";
 const Main = props => {
   const { onEditProfile, onAddPlace, onEditAvatar, onCardClick } = props;
   //Хуки, изменяющие состояние
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setAvatar] = useState();
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setAvatar] = useState("");
   const [cards, setCards] = useState([]);
   
   useEffect(() => {
