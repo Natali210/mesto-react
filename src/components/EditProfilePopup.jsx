@@ -25,7 +25,7 @@ const EditProfilePopup = props => {
   useEffect(() => {
     setName(currentUser.name);
     setAbout(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   //Обработчик для сохранения данных
   function handleSubmit(evt) {
@@ -53,7 +53,7 @@ const EditProfilePopup = props => {
         className="popup__input popup__input_name"
         placeholder="Имя" minLength="2" maxLength="30"
         onChange={handleNameChange}
-        defaultValue={name}/>
+        value={name}/>
       <span id="name-error" className="popup__error-visible"></span>
     </div>
 
@@ -63,7 +63,7 @@ const EditProfilePopup = props => {
         className="popup__input popup__input_about"
         placeholder="О себе" minLength="2" maxLength="200"
         onChange={handleAboutChange}
-        defaultValue={about}/>
+        value={about}/>
       <span id="about-error" className="popup__error-visible">
       </span>
     </div>
