@@ -9,7 +9,7 @@
 
 **Ссылки:**
 GitHub: https://github.com/Natali210/mesto-react
-GH-pages: https://natali210.github.io/mesto/
+GH-pages: https://natali210.github.io/mesto-react/
 
 **Команды для сборки и запуска проекта:**
 npm start - режим разработчика
