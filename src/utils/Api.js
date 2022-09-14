@@ -38,7 +38,7 @@ class Api {
   addNewAvatar(data){
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -77,21 +77,25 @@ class Api {
   }
 
     //Метод, собирающий лайки
-  putLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
+  putLike(card) {
+    return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(this._getJsonOrError)
+    .then(this._getJsonOrError);
   }
 
-    //Метод, удаляющий лайк
-  removeLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
+  //Метод, удаляющий лайк
+  removeLike(card) {
+    return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._getJsonOrError)
+    .then(this._getJsonOrError);
+  }
+
+  changeLikeCardStatus(card, isLiked) {
+    return isLiked ? this.putLike(card) : this.removeLike(card);
   }
 }
 

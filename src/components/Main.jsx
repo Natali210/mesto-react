@@ -1,47 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import Card from "./Card";
-import { api } from "../utils/Api";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
-//Обработчики событий передаются как пропсы
 const Main = props => {
-  const { onEditProfile, onAddPlace, onEditAvatar, onCardClick } = props;
-  //Хуки, изменяющие состояние
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setAvatar] = useState("");
-  const [cards, setCards] = useState([]);
+  const { onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardDelete, onCardLike } = props;
   
-  useEffect(() => {
-    api.getUserInfo()
-    .then((res) => {
-      setAvatar(res.avatar);
-      setUserName(res.name);
-      setUserDescription(res.about);
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    })
-
-    api.getCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log('Ошибка: ${err}');
-      });
-  }, []);  
+  // Подписываемся на контекст, чтобы использовать нужные поля из полученного объекта текущего пользователя
+  const currentUser = useContext(CurrentUserContext);
 
   return (
-    <div>
+    <>
       <section className="profile root__profile">
       <div className="profile__avatar-container">
-        <img className="profile__avatar" src={userAvatar} alt="Аватар пользователя" />
+        <img className="profile__avatar" src={currentUser.avatar} alt="Аватар пользователя" />
         <div className="profile__avatar-overlay" onClick={onEditAvatar}></div>
       </div>
         <div className="profile__info">
         <div className="profile__about">
-          <h1 className="profile__title">{userName}</h1>
-          <p className="profile__subtitle">{userDescription}</p>
+          <h1 className="profile__title">{currentUser.name}</h1>
+          <p className="profile__subtitle">{currentUser.about}</p>
         </div>
           <button type="button" aria-label="Редактировать профиль" className="profile__edit" 
           onClick={onEditProfile} />
@@ -60,13 +37,14 @@ const Main = props => {
               title={card.name}
               onCardClick={onCardClick}
               likesAmount={card.likes.length}
-            />
-        )
-        )}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />))
+          }
         </ul>
       </section>
 
-    </div>
+    </>
   )
 }
 
